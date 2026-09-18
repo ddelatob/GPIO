@@ -19,18 +19,19 @@ ASFLAGS += -fmessage-length=0
 
 C_DEFS = -DSTM32L432xx
 CMSIS_CORE_PATH = C:/Toolchains/CMSIS_6/CMSIS/Core/Include
-CMSIS_DEVICE_PATH = C:/Toolchains/cmsis_device_l4/Include
+CMSIS_DEVICE_PATH = C:/Toolchains/cmsis-device-l4/Include
 
-C_INCLUDES = -I$(CMSIS_CORE_PATH)
-             -I$(CMSIS_DEVICE_PATH)
+C_INCLUDES = -I$(CMSIS_CORE_PATH) \
+             -I$(CMSIS_DEVICE_PATH) \
              -IInc
 
 CFLAGS = -mcpu=$(MCU_SPEC)
 CFLAGS += -mthumb
 CFLAGS += -Wall
-CFLAGS += -g
+CFLAGS += -g3
 CFLAGS += -fmessage-length=0
 CFLAGS += --specs=nosys.specs
+CFLAGS += -O0
 CFLAGS += $(C_DEFS) $(C_INCLUDES)
 
 
@@ -67,5 +68,4 @@ $(TARGET).bin: $(TARGET).elf
 
 .PHONY: clean
 clean:
-	rm -f $(OBJS)
-	rm -f $(TARGET).elf
+	-del /Q /F Src\*.o 2>NUL
